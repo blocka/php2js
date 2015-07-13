@@ -10,6 +10,7 @@ class TranspilerFactory
 {
     private static $transpilersMap = [
         'Stmt_Echo' => 'Statement\Echo',
+        'Stmt_Return' => 'Statement\Return',
         'Scalar_String' => 'Scalar\String',
         'Expr_BinaryOp_Concat' => 'Expression\Concat',
         'Expr_BinaryOp_Div' => 'Expression\Operators\Arithmetic\Division',
@@ -18,10 +19,14 @@ class TranspilerFactory
         'Expr_BinaryOp_Mod' => 'Expression\Operators\Arithmetic\Modulus',
         'Expr_BinaryOp_Mul' => 'Expression\Operators\Arithmetic\Multiplication',
         'Expr_BinaryOp_Pow' => 'Expression\Operators\Arithmetic\Power',
+        'Expr_PostInc' => 'Expression\Operators\Arithmetic\PostInc',
+        'Expr_FuncCall' => 'Expression\FuncCall',
         'Scalar_LNumber' => 'Scalar\Number',
         'Scalar_DNumber' => 'Scalar\Number',
         'Expr_Assign' => 'Expression\Assignment',
+        'Expr_AssignOp_Plus' => 'Expression\AssignOpPlus',
         'Expr_Variable' => 'Expression\Variable',
+        'Expr_ArrayDimFetch' => 'Expression\ArrayDimFetch',
         'Expr_BinaryOp_Equal' => 'Expression\Operators\Comparison\Equal',
         'Expr_BinaryOp_NotEqual' => 'Expression\Operators\Comparison\NotEqual',
         'Expr_BinaryOp_Identical' => 'Expression\Operators\Comparison\Identical',
@@ -38,6 +43,7 @@ class TranspilerFactory
         'Expr_BinaryOp_SmallerOrEqual' => 'Expression\Operators\Comparison\SmallerOrEqual',
         'Stmt_If' => 'Statement\If',
         'Stmt_ElseIf' => 'Statement\If',
+        'Stmt_For'=>'Statement\For',
         'Expr_ConstFetch' => 'Expression\Constant',
     ];
 
@@ -54,6 +60,7 @@ class TranspilerFactory
         }
         $type = $node->getType();
         if (!array_key_exists($type, self::$transpilersMap)) {
+            print_R($type);die;
             throw new NotImplementedException("'" . $node->getType() . "' not implemented.");
         }
         $className = "\\Php2js\\Transpilers\\" . self::$transpilersMap[$type] . 'Transpiler';
