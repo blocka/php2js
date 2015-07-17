@@ -25,6 +25,7 @@ class TranspilerFactory
         'Scalar_DNumber' => 'Scalar\Number',
         'Expr_Assign' => 'Expression\Assignment',
         'Expr_AssignOp_Plus' => 'Expression\AssignOpPlus',
+        'Expr_AssignOp_Concat' => 'Expression\AssignOpPlus',
         'Expr_Variable' => 'Expression\Variable',
         'Expr_ArrayDimFetch' => 'Expression\ArrayDimFetch',
         'Expr_BinaryOp_Equal' => 'Expression\Operators\Comparison\Equal',
